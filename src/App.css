@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+body {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2 {
+  padding: 0 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 4px;
+  line-height: 1rem;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.App-link {
-  color: #61dafb;
+.Item:nth-child(even) {
+  background: #f2f2f2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Item__name {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.Item__price {
+
+}
+
+.Item__ingredients {
+  flex: 1;
+  margin-left: 6px;
+}
+
+.Item__ingredient {
+  --background-color: #000;
+  --color: #fff;
+  background: var(--background-color);
+  color: var(--color);
+  border-radius: 8px;
+  display: inline-block;
+  padding: 2px 4px;
+  margin-right: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: .8rem;
+}
+
+.Item__ingredient:hover, .Item__ingredient:focus {
+  box-shadow: 0 0 0 1px black;
+}
+
+/*
+var colourIsLight = function (r, g, b) {
+  
+  // Counting the perceptive luminance
+  // human eye favors green color... 
+  var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return (a < 0.5);
+}
+*/
+
+.Item__ingredient.tomat { --background-color: rgb(244, 67, 54); --color: #fff; }
+.Item__ingredient.ost { --background-color: rgb(255, 213, 79); --color: #111; }
+.Item__ingredient.skinka { --background-color: rgb(255, 205, 210); --color: #111; }
+.Item__ingredient.champinjoner { --background-color: rgb(121, 85, 72); --color: #fff; }
+.Item__ingredient.paprika { --background-color: rgb(139, 195, 74); --color: #111; }
+.Item__ingredient.tonfisk { --background-color: rgb(233, 30, 99); --color: #fff; }
+.Item__ingredient.gurka { --background-color: rgb(76, 175, 80); --color: #111; }
+.Item__ingredient.ananas { --background-color: rgb(255, 235, 59); --color: #111; }
+.Item__ingredient.sallad { --background-color: rgb(220, 231, 117); --color: #111; }
+.Item__ingredient.citron { --background-color: rgb(255, 245, 157); --color: #111; }
+.Item__ingredient.lok { --background-color: rgb(255, 224, 130); --color: #111; }
+.Item__ingredient.kyckling { --background-color: rgb(226, 177, 157); --color: #111; }
+/* oliver, farost, rakor, pitabröd, kött, peperoni, starksas, kott, tunnbrod, oxfile, vitlok, bearnaisesas, gorgonzola, mozzarella, valnotter, ruccola, honung, oregano */
+
+.header {
+  text-align: center;
+  line-height: 1.5rem;
 }

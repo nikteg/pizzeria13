@@ -1,12 +1,20 @@
 import React, { useState } from "react"
 
 import { mapType, mapIngredient, types, ofType, withIngredients } from "./data/items"
+import { useLocalStorage } from "./hooks/localStorage"
 
-function MenuItem({ item: { number, name, price, ingredients }, onIngredientClick }) {
+function MenuItem({ item, isFavorite, onFavoriteClick, onIngredientClick }) {
+  const { number, name, price, ingredients } = item
+
   return (
     <div className="Item">
       <div className="Item__top">
-        <span className="Item__name">{number ? number + ". " + name : name}</span>
+        <span className="Item__name">
+          {number ? number + ". " + name : name}{" "}
+          <span
+            className={"Item__favorite" + (isFavorite ? " favorite" : "")}
+            onClick={() => onFavoriteClick(item)}></span>
+        </span>
         <span className="Item__price">{price} kr</span>
       </div>
       <span className="Item__ingredients">
@@ -31,6 +39,7 @@ function MenuItem({ item: { number, name, price, ingredients }, onIngredientClic
 
 function App() {
   const [{ filtered_ingredients }, setState] = useState({ filtered_ingredients: [] })
+  const [favorites, setFavorites] = useLocalStorage("favorites", [])
 
   const addIngredient = ingredient => {
     if (!filtered_ingredients.includes(ingredient)) {
@@ -40,6 +49,18 @@ function App() {
 
   const removeIngredient = ingredient => {
     setState({ filtered_ingredients: filtered_ingredients.filter(i => i !== ingredient) })
+  }
+
+  const toggleFavorite = item => {
+    if (favorites.includes(item)) {
+      setFavorites(favorites.filter(i => i !== item))
+    } else {
+      setFavorites(favorites.concat(item))
+    }
+  }
+
+  const isFavorite = item => {
+    return favorites.includes(item)
   }
 
   return (
@@ -72,30 +93,92 @@ function App() {
           </div>
         </div>
       )}
-      <h2>{mapType(types.pizza)}</h2>
-      {withIngredients(ofType(types.pizza), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
-      <h2>{mapType(types.inbakad_pizza)}</h2>
-      {withIngredients(ofType(types.inbakad_pizza), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
-      <h2>{mapType(types.de_luxe_special)}</h2>
-      {withIngredients(ofType(types.de_luxe_special), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
-      <h2>{mapType(types.kebab)}</h2>
-      {withIngredients(ofType(types.kebab), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
-      <h2>{mapType(types.lasagne)}</h2>
-      {withIngredients(ofType(types.lasagne), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
-      <h2>{mapType(types.sallad)}</h2>
-      {withIngredients(ofType(types.sallad), filtered_ingredients).map(item => (
-        <MenuItem key={item.name} item={item} onIngredientClick={addIngredient} />
-      ))}
+      {favorites.length > 0 && (
+        <div>
+          <h2>Favoriter</h2>
+          {withIngredients(favorites, filtered_ingredients).map(item => (
+            <MenuItem
+              key={item.name}
+              item={item}
+              onIngredientClick={addIngredient}
+              isFavorite
+              onFavoriteClick={toggleFavorite}
+            />
+          ))}
+        </div>
+      )}
+      <div>
+        <h2>{mapType(types.pizza)}</h2>
+        {withIngredients(ofType(types.pizza), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>{mapType(types.inbakad_pizza)}</h2>
+        {withIngredients(ofType(types.inbakad_pizza), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>{mapType(types.de_luxe_special)}</h2>
+        {withIngredients(ofType(types.de_luxe_special), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>{mapType(types.kebab)}</h2>
+        {withIngredients(ofType(types.kebab), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>{mapType(types.lasagne)}</h2>
+        {withIngredients(ofType(types.lasagne), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>{mapType(types.sallad)}</h2>
+        {withIngredients(ofType(types.sallad), filtered_ingredients).map(item => (
+          <MenuItem
+            key={item.name}
+            item={item}
+            onIngredientClick={addIngredient}
+            isFavorite={isFavorite(item)}
+            onFavoriteClick={toggleFavorite}
+          />
+        ))}
+      </div>
     </div>
   )
 }

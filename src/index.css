@@ -24,7 +24,7 @@ h2 {
   color: #444;
 }
 
-.Item:nth-child(even) {
+.Item:nth-of-type(odd) {
   background: #f2f2f2;
 }
 
@@ -38,6 +38,19 @@ h2 {
   text-transform: uppercase;
   margin-right: 6px;
   font-weight: bold;
+}
+
+.Item__favorite {
+  cursor: pointer;
+}
+
+.Item__favorite::before {
+  content: "\2606";
+}
+.Item__favorite.favorite::before,
+.Item__favorite:hover::before {
+  content: "\2605";
+  color: rgb(197, 23, 23);
 }
 
 .Item__price {

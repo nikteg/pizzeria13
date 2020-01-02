@@ -51,16 +51,16 @@ function App() {
     setState({ filtered_ingredients: filtered_ingredients.filter(i => i !== ingredient) })
   }
 
+  const isFavorite = item => {
+    return favorites.some(i => i.type === item.type && i.name === item.name)
+  }
+
   const toggleFavorite = item => {
-    if (favorites.includes(item)) {
-      setFavorites(favorites.filter(i => i !== item))
+    if (isFavorite(item)) {
+      setFavorites(favorites.filter(i => i.type !== item.type || i.name !== item.name))
     } else {
       setFavorites(favorites.concat(item))
     }
-  }
-
-  const isFavorite = item => {
-    return favorites.includes(item)
   }
 
   return (

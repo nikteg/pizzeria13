@@ -625,7 +625,7 @@ const items = [
     price: 85,
     ingredients: [
       ingredients.pitabrod,
-      ingredients.kott,
+      ingredients.kebabkott,
       ingredients.sallad,
       ingredients.tomat,
       ingredients.gurka,
@@ -641,7 +641,7 @@ const items = [
     price: 85,
     ingredients: [
       ingredients.tunnbrod,
-      ingredients.kott,
+      ingredients.kebabkott,
       ingredients.sallad,
       ingredients.tomat,
       ingredients.gurka,

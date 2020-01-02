@@ -24,7 +24,9 @@ function App() {
   const [{ filtered_ingredients }, setState] = useState({ filtered_ingredients: [] })
 
   const addIngredient = (ingredient) => {
-    setState({ filtered_ingredients: filtered_ingredients.concat(ingredient) })
+    if (!filtered_ingredients.includes(ingredient)) {
+      setState({ filtered_ingredients: filtered_ingredients.concat(ingredient) })
+    }
   }
 
   const removeIngredient = (ingredient) => {
@@ -42,11 +44,13 @@ function App() {
       </div>
       {filtered_ingredients.length > 0 && (
         <div className="filters">
-          <h3>Ingredientsfilter:</h3>
-          {filtered_ingredients.map((ingredient) => {
-            const name = mapIngredient(ingredient)
-            return <span key={name} className={"Item__ingredient " + name} onClick={() => removeIngredient(ingredient)}>&times; {name}</span>
-          })}
+          <h3>Ingrediensfilter</h3>
+          <div className="Item__ingredients">
+            {filtered_ingredients.map((ingredient) => {
+              const name = mapIngredient(ingredient)
+              return <span key={name} className={"Item__ingredient " + name} onClick={() => removeIngredient(ingredient)}>&times; {name}</span>
+            })}
+          </div>
         </div>
       )}
       <h2>{mapType(types.pizza)}</h2>

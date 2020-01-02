@@ -1,10 +1,14 @@
 body {
   max-width: 800px;
   margin: 0 auto;
+  padding: 8px;
 }
 
 h2 {
   padding: 0 8px;
+  font-weight: normal;
+  margin: 16px 0 8px 0;
+  text-transform: uppercase;
 }
 
 .Item {
@@ -14,6 +18,7 @@ h2 {
   line-height: 1rem;
   padding: 4px 8px;
   border-radius: 4px;
+  color: #444;
 }
 
 .Item:nth-child(even) {
@@ -23,15 +28,16 @@ h2 {
 .Item__name {
   font-size: 1.2rem;
   text-transform: uppercase;
+  margin-right: 6px;
 }
 
 .Item__price {
-
+  /* font-size: .85rem; */
 }
 
 .Item__ingredients {
   flex: 1;
-  margin-left: 6px;
+  margin-top: -4px;
 }
 
 .Item__ingredient {
@@ -42,7 +48,7 @@ h2 {
   border-radius: 8px;
   display: inline-block;
   padding: 2px 4px;
-  margin-right: 4px;
+  margin: 4px 4px 0 0;
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
@@ -80,4 +86,19 @@ var colourIsLight = function (r, g, b) {
 .header {
   text-align: center;
   line-height: 1.5rem;
+}
+
+.filters {
+  border: 1px solid #f2f2f2;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.filters h3 {
+  text-transform: uppercase;
+  font-weight: normal;
+  padding: 0;
+  margin: 0 0 16px 0;
 }

@@ -24,6 +24,10 @@ h2 {
   color: #444;
 }
 
+.Item.hidden {
+  opacity: 0.25;
+}
+
 .Item:nth-of-type(odd) {
   background: #f2f2f2;
 }

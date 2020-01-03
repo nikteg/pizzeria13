@@ -740,12 +740,17 @@ export function ofType(type) {
   return items.filter(item => item.type === type)
 }
 
+export function partition(array, predicate) {
+  return array.map(a => (predicate(a) ? { matched: true, item: a } : { matched: false, item: a }))
+}
+
 export function withIngredients(items, ingredients) {
   if (ingredients.length === 0) {
-    return items
+    return partition(items, () => true)
   }
 
-  return items.filter(
+  return partition(
+    items,
     item => item.ingredients && ingredients.every(ingredient => item.ingredients.includes(ingredient))
   )
 }
